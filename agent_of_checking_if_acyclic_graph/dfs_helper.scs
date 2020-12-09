@@ -1,0 +1,67 @@
+spc_program -> dfs_helper
+(*
+    -> rrel_params: ...
+    (*
+        -> rrel_1: rrel_in: _current_vertex;;
+        -> rrel_2: rrel_in: _graph;;
+        -> rrel_3: rrel_out: _result;;
+    *);;
+
+    -> rrel_operators: ...
+    (*
+        -> rrel_init: ..dfs_operator0
+        (*
+            <- searchElStr5;;
+
+            -> rrel_1: rrel_assign: rrel_scp_const: _current_vertex;;
+            -> rrel_2: rrel_assign: rrel_scp_var: rrel_pos_const_perm: _arc1;;
+            -> rrel_3: rrel_assign: rrel_scP_node: rrel_scp_var: node;;
+            -> rrel_4: rrel_assign: rrel_scp_var: rrel_pos_const_perm: _arc2;;
+            -> rrel_5: rrel_fixed: rrel_scp_const: rrel_edges;;
+
+            => nrel_then: ..dfs_operator1;;
+            => nrel_else: ..dfs_operator_result;;
+        *);;
+
+        -> ..dfs_operator1
+        (*
+            <- ifCoin;;
+
+            -> rrel_1: rrel_scp_var: rrel_assign: _current_vertex;;
+            -> rrel_2: rrel_scp_var: rrel_assigh: _marked_vertex;;
+
+            => nrel_else: ..dfs_operator_return;;
+            => nrel_then: ..dfs_operator2;;
+        *);;
+
+        -> ..dfs_operator2
+        (*
+            <- genElStr3;;
+            -> rrel_1: rrel_assign: marked_vertex;;
+            -> rrel_2: rrel_assign: rrel_scp_var: rrel_pos_const_perm: _arc;;
+            -> rrel_3: rrel_fixed: rrel_scp_var: _current_vertex;;
+
+            => nrel_goto: ..dfs_operator3;; 
+        *);;
+
+        -> ..dfs_operator3
+        (*
+            <- call;;
+
+            -> rrel_1: rrel_fixed: rrel_scp_const: dfs_helper;;
+            -> rrel_2: rrel_fixed: rrel_scp: ...
+            (*
+                -> rrel_1: rrel_assign: rrel_scp_var: _next_node;;
+                -> rrel_2: rrel_assign: rrel_scp_var: _graph;;
+            *);;
+            -> rrel_3: rrel_assign: rrel_scp_var: descriptor;;
+
+            => nrel_goto: ..dfs_operator0;;  
+        *);;
+
+        -> ..dfs_operator_return
+        (*
+            <- return;;
+        *);;
+    *);;
+*);;
